@@ -1,0 +1,42 @@
+﻿@model IEnumerable<mediaradar.Models.TopAdsModel>
+@{
+    ViewBag.Title = "Top Brands";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Top Brands</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Brand ID
+        </th>
+        <th>
+            Brand Name
+        </th>
+        <th>
+            Total Num of Pages
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand.BrandId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand.BrandName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SumOfPages)
+            </td>
+
+        </tr>
+    }
+
+</table>
+<br />

@@ -1,0 +1,56 @@
+﻿@model PagedList.IPagedList<mediaradar.AdDataService.Ad>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Top Cover";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>All</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Add ID", "TopCover", new { sortOrder = ViewBag.AddIDSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Brand ID", "TopCover", new { sortOrder = ViewBag.BrandIDSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Brand Name", "TopCover", new { sortOrder = ViewBag.BrandNameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Num of Pages", "TopCover", new { sortOrder = ViewBag.NumOfPagesSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Position", "TopCover", new { sortOrder = ViewBag.PositionSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand.BrandId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand.BrandName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumPages)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Position)
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("TopCover", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
